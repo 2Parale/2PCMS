@@ -1,0 +1,193 @@
+BODY, TD {
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+    margin: 0px;
+}
+
+A {
+    text-decoration: none;
+    color: #3B5998;
+}
+
+A:Hover {
+    text-decoration: underline;
+}
+
+div.clear {clear: both;}
+div.spacer5 {height: 5px;}
+div.spacer10 {height: 10px;}
+
+
+
+
+div#header {
+    margin-bottom: 10px;
+    height: 30px;
+    background-color: #00aabb;
+    border-bottom: 3px solid #333333;
+    line-height: 30px;
+    font-size: 20px;
+    padding: 0px 10px;
+}
+div#header a {color: #fff;}
+
+div#maincontainer {    
+    width: 100%;
+}
+
+div#menucontainer {
+    width: 250px;
+    float: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+div#menucontainer div.powered-by {
+    font-size: 10px;
+    margin-top: 20px;
+}
+div#menucontainer div.powered-by a {font-size: 11px; display: block;}
+
+div#menucontainer div.mtitle {
+    background-color: #1A7599;
+    color: #fff;
+    padding: 5px;
+    font-weight: bold;
+    margin-bottom: 3px;    
+}
+
+div#menucontainer div.mlinks {
+    margin-bottom: 10px;
+}
+div#menucontainer div.mlinks a {
+    display: block;
+    margin-bottom: 2px;
+    padding: 3px; 
+    border: 1px solid #f2f2f2;
+}
+div#menucontainer div.mlinks a:hover {border: 1px solid #444; text-decoration: none;}
+div#menucontainer div.mlinks a.selected {
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #f2f2f2;
+}
+
+div#activecontainer {
+    float: left;        
+    width: 1000px;
+}
+
+div#activecontainer h1 {
+    margin: 0px 0px 10px 0px;
+    color: #0e536f;
+    font-size: 22px;
+}
+
+div#activecontainer h2, h3 {
+    margin: 0px 0px 10px 0px;
+    color: #0e536f;
+}
+
+
+
+div.feed-item {
+    padding: 5px;
+    border: 1px solid #8c8c8c;
+    width: 700px;
+    margin-bottom: 10px;
+}
+
+
+div.form-container {padding: 5px; border: 2px solid #f2f2f2;}
+div.form-container div.form-title {display: block; background-color: #f2f2f2; padding: 4px; color: #444; font-weight: bold; margin-bottom: 10px; font-size: 16px;}
+div.form_item {}
+div.form_item label {width: 150px; float: left; padding: 5px; font-weight: bold; color: #444;}
+div.form_item input.txt {width: 300px; float: left; padding: 2px;}
+div.form_item select {width: 300px; float: left; padding: 2px;}
+
+
+div.dashboard-item {
+    width: 420px; 
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 3px;
+    border: 2px solid #f2f2f2;
+    float: left;
+    height: 150px;
+}
+
+div.dashboard-item span {
+    height: 24px;
+    line-height: 24px;
+    background: url('../images/chart-icon.png') left no-repeat #f2f2f2;    
+    padding-left: 30px;
+    display: block;
+    font-weight: bold;
+    color: #444;    
+}
+
+/* BTN STYLE - START*/
+a.button {
+    background: transparent url('../images/bg_button_a.gif') no-repeat scroll top right;
+    color: #444;
+    display: block;
+    float: left;
+    font: normal 12px arial, sans-serif;
+    height: 24px;
+    margin-right: 6px;
+    padding-right: 18px; /* sliding doors padding */
+    text-decoration: none;
+}
+
+a.button span {
+    background: transparent url('../images/bg_button_span.gif') no-repeat;
+    display: block;
+    line-height: 14px;
+    padding: 5px 0 5px 18px;
+    font-weight: bold;
+    
+}
+
+a.button span.normal {
+    font-weight: normal;
+}
+
+a.button:active {
+    background-position: bottom right;
+    color: #000;
+    outline: none; /* hide dotted outline in Firefox */
+}
+
+a.button:active span {
+    background-position: bottom left;
+    padding: 6px 0 4px 18px; /* push text down 1px */
+}
+/* BTN STYLE - END*/
+
+
+div.alert_container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #FFE779;
+    color: #54514a;
+    border-bottom: 10px solid #D10400;
+    display: none;
+}
+
+
+div#error-holder{
+    background-color: #ffffcc;
+    color: #d70133;
+    font-size: 10px;
+    padding: 10px;
+    float: left;
+    width: 300px;
+    margin-top: 10px;
+}

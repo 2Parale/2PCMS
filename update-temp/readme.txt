@@ -1,0 +1,1 @@
+This file is added to the Git repository just to keep folder structure, since Git cannot track empty folders.

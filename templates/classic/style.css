@@ -1,0 +1,156 @@
+BODY{
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+    margin: 0px;
+}
+
+div.clear {clear: both;}
+div.spacer5 {height: 5px;}
+div.spacer10 {height: 10px;}
+
+
+#header-wrapper {margin: 0px auto; width: 960px; margin-bottom: 10px; padding: 10px 5px; border-bottom: 5px solid #E40241;}
+#header-wrapper #search_box {float: right;}
+#header-wrapper #search_box input.search {width: 200px; padding: 4px; background: url('images/search.gif') no-repeat right; border: 1px solid #f2f2f2;}
+#header-wrapper #search_box input.search-off {color: #8c8c8c; font-style: italic;}
+#header-wrapper #search_box input.search-on {color: #000; font-style: normal; font-weight: bold;}
+#header-wrapper #search_box input.btn {padding: 4px;}
+#header-wrapper span {float: left;}
+
+
+#content-wrapper {margin: 0px auto; width: 960px;}
+#content-wrapper #sidebar-left {width: 250px; float: left; margin-right: 10px;}
+#content-wrapper #sidebar-left #menu {margin-bottom: 20px;}
+#content-wrapper #sidebar-left #menu h2 {margin: 0px; font-size: 18px; background-color: #E5452D; padding: 5px; color: #fff;}
+#content-wrapper #sidebar-left #menu h3 {margin: 0px; font-size: 12px; padding: 2px 0px; font-weight: normal;}
+#content-wrapper #sidebar-left #menu h3 a {display: block; color: #404040; text-decoration: none; border: 1px solid #f2f2f2; font-size: 14px; padding: 5px 3px;}
+#content-wrapper #sidebar-left #menu h3 a:hover {text-decoration: underline; border: 1px solid #83D1E5;}
+
+#content-wrapper #sidebar-left #prices {margin-bottom: 20px;}
+#content-wrapper #sidebar-left #prices h2 {margin: 0px; font-size: 18px; background-color: #E5452D; padding: 5px; color: #fff;}
+#content-wrapper #sidebar-left #prices h4 {margin: 0px; font-size: 12px; padding: 2px 0px; font-weight: normal;}
+#content-wrapper #sidebar-left #prices h4 a {display: block; color: #404040; text-decoration: none; border: 1px solid #f2f2f2; font-size: 14px; padding: 5px 3px;}
+#content-wrapper #sidebar-left #prices h4 a:hover {text-decoration: underline; border: 1px solid #83D1E5;}
+
+#content-wrapper #sidebar-left #brands {margin-bottom: 20px; margin-top: 20px;}
+#content-wrapper #sidebar-left #brands h2 {margin: 0px; font-size: 18px; background-color: #E5452D; padding: 5px; color: #fff;}
+#content-wrapper #sidebar-left #brands h4 {margin: 0px; font-size: 12px; padding: 2px 0px; font-weight: normal;}
+#content-wrapper #sidebar-left #brands h4 a {display: block; color: #404040; text-decoration: none; border: 1px solid #f2f2f2; font-size: 14px; padding: 5px 3px;}
+#content-wrapper #sidebar-left #brands h4 a:hover {text-decoration: underline; border: 1px solid #83D1E5;}
+
+#content-wrapper #sidebar-left #acategories {margin-bottom: 20px; margin-top: 20px;}
+#content-wrapper #sidebar-left #acategories h2 {margin: 0px; font-size: 14px; background-color: #197C91; padding: 5px; color: #fff;}
+#content-wrapper #sidebar-left #acategories h4 {margin: 0px; font-size: 12px; padding: 2px 0px; font-weight: normal;}
+#content-wrapper #sidebar-left #acategories h4 a {display: block; color: #404040; text-decoration: none;  border: 1px solid #f2f2f2; font-size: 12px; padding: 5px 3px;}
+#content-wrapper #sidebar-left #acategories h4 a:hover {text-decoration: underline; border: 1px solid #F55800;}
+
+#content-wrapper #sidebar-left #articles {margin-bottom: 20px; margin-top: 20px;}
+#content-wrapper #sidebar-left #articles h2 {margin: 0px; font-size: 14px; background-color: #197C91; padding: 5px; color: #fff;}
+#content-wrapper #sidebar-left #articles h4 {margin: 0px; font-size: 12px; padding: 2px 0px; font-weight: normal; }
+#content-wrapper #sidebar-left #articles h4 a {display: block; color: #404040; text-decoration: none; border: 1px solid #f2f2f2; font-size: 12px; padding: 5px 3px;}
+#content-wrapper #sidebar-left #articles h4 a:hover {text-decoration: underline; border: 1px solid #F55800;}
+
+#content-wrapper #sidebar-left #lps {margin-bottom: 20px; margin-top: 20px;}
+#content-wrapper #sidebar-left #lps h2 {margin: 0px; font-size: 14px; background-color: #197C91; padding: 5px; color: #fff;}
+#content-wrapper #sidebar-left #lps h4 {margin: 0px; font-size: 12px; padding: 2px 0px; font-weight: normal; }
+#content-wrapper #sidebar-left #lps h4 a {display: block; color: #404040; text-decoration: none; border: 1px solid #f2f2f2; font-size: 12px; padding: 5px 3px;}
+#content-wrapper #sidebar-left #lps h4 a:hover {text-decoration: underline; border: 1px solid #F55800;}
+
+#content-wrapper #sidebar-left div.sep {border-top: 5px solid #f2f2f2;}
+
+#content-wrapper #content-zone {width: 700px; float: left;}
+#content-wrapper #content-zone #breadcrumb {margin-bottom: 5px; padding: 5px 0px;}
+#content-wrapper #content-zone #breadcrumb a {color: #1122CC;}
+
+#content-wrapper #content-zone h1 {font-size: 20px; margin: 0px; margin-bottom: 10px;}
+#content-wrapper #content-zone div.index-products {}
+#content-wrapper #content-zone div.index-products span.heading {display: block; margin-bottom: 5px; background-color: #FFB900; color: #000; padding: 3px; font-size: 20px;}
+#content-wrapper #content-zone div.index-products div.index-product-item {width: 330px; margin-right: 20px; margin-bottom: 10px; float: left; overflow: hidden; padding: 4px; border: 1px solid #8c8c8c;}
+#content-wrapper #content-zone div.index-products div.index-product-item-last {width: 330px; margin-bottom: 10px; float: left; overflow: hidden; padding: 4px; border: 1px solid #8c8c8c;}
+#content-wrapper #content-zone div.index-products div.index-product-item:hover {border: 1px solid #AFCB05;}
+#content-wrapper #content-zone div.index-products div.index-product-item-last:hover {border: 1px solid #AFCB05;}
+#content-wrapper #content-zone div.index-products div.index-product-item div.item-info {float: left; width: 230px; text-align: left;}
+#content-wrapper #content-zone div.index-products div.index-product-item-last div.item-info {float: left; width: 230px; text-align: left;}
+#content-wrapper #content-zone div.index-products div.index-product-item div.item-info a {font-size: 14px; color: #1D3752; font-weight: bold; display: block; margin-bottom: 10px;}
+#content-wrapper #content-zone div.index-products div.index-product-item-last div.item-info a {font-size: 14px; color: #1D3752; font-weight: bold; display: block; margin-bottom: 10px;}
+#content-wrapper #content-zone div.index-products div.index-product-item div.item-info span {color: #E43111; font-size: 18px; font-weight: bold;}
+#content-wrapper #content-zone div.index-products div.index-product-item-last div.item-info span {color: #E43111; font-size: 18px; font-weight: bold;}
+
+
+#content-wrapper #content-zone #listing-list {margin-top: 20px; margin-bottom: 20px;}
+#content-wrapper #content-zone #listing-list div.list-item {width: 340px; margin-right: 20px; float: left; margin-bottom: 20px; border-bottom: 2px solid #f2f2f2; padding-bottom: 5px;}
+#content-wrapper #content-zone #listing-list div.last-item {margin-right: 0px;}
+#content-wrapper #content-zone #listing-list div.list-item a.title {display: block; color: #444; margin-bottom: 5px; height: 17px; overflow: hidden; font-size: 14px; font-weight: bold;} 
+#content-wrapper #content-zone #listing-list div.list-item span.price {float: right; font-size: 18px; font-weight: bold; padding: 2px 3px; color: #E43111; margin-left: 10px;}
+#content-wrapper #content-zone #listing-list div.list-item span.desc {float: left; margin-left: 10px; font-size: 11px; width: 230px; margin-top: 5px;}
+
+#content-wrapper #content-zone div.pagination {background-color: #C1CC0F; padding: 5px; color: #444; border-top: 1px solid #758405; border-bottom: 1px solid #758405;}
+#content-wrapper #content-zone div.pagination span.count {float: left;}
+#content-wrapper #content-zone div.pagination span.pages {float: right; text-align: right;}
+#content-wrapper #content-zone div.pagination span.pages a {color: #444; padding: 3px 5px; background-color: #fff;}
+#content-wrapper #content-zone div.pagination span.pages a.selected {font-weight: bold; background-color: #575757; color: #fff;}
+
+#content-wrapper #content-zone #product_container {}
+#content-wrapper #content-zone #product_container div.img_holder {width: 250px; height: 250px; border: 10px solid #f2f2f2; float: left;}
+#content-wrapper #content-zone #product_container div.desc_holder {margin-left: 30px; width: 400px; float: left;}
+#content-wrapper #content-zone #product_container div.desc_holder p {margin: 0px; padding: 0px; margin-bottom: 10px;}
+#content-wrapper #content-zone #product_container div.desc_holder div.reducere {font-size: 22px; background-color: #E40241; color: #fff; padding: 5px; margin-bottom: 5px; font-weight: bold;}
+#content-wrapper #content-zone #product_container div.desc_holder div.reducere span {text-decoration: line-through; font-weight: normal; font-size: 18px;}
+#content-wrapper #content-zone #product_container div.desc_holder p.price span {font-size: 22px; background-color: #f2f2f2; padding: 5px; margin-bottom: 10px; display: block;}
+#content-wrapper #content-zone #product_container div.desc_holder p.price span.inactive-product {font-size: 12px; background-color: #fff; padding: 5px;  width: 200px; color: #f52535;}
+#content-wrapper #content-zone #product_container div.desc_holder p.price a {}
+#content-wrapper #content-zone #product_container div.desc_holder p.description {border-top: 4px solid #f2f2f2; padding: 5px 0px;}
+#content-wrapper #content-zone #product_container div.desc_holder p.description a {color: #1122CC; font-weight: bold;}
+
+#content-wrapper #content-zone #related_products {border-top: 5px solid #f2f2f2; margin-top: 20px; padding: 10px 0px;}
+#content-wrapper #content-zone #related_products h3 {margin: 0px; margin-bottom: 5px; background-color: #A0B745; color: #fff; padding: 5px;}
+
+#content-wrapper #content-zone #article_box {border-top: 5px solid #f2f2f2; margin-top: 20px; padding: 10px 0px;}
+#content-wrapper #content-zone #article_box h3 {margin: 0px; margin-bottom: 5px; background-color: #A0B745; color: #fff; padding: 5px;}
+#content-wrapper #content-zone #article_box div.article_item {padding: 10px; border-left: 3px solid #FFB900;}
+#content-wrapper #content-zone #article_box div.article_item span {font-size: 16px; background-color: #FFB900; padding: 5px; color: #000;}
+#content-wrapper #content-zone #article_box div.article_item div {margin-top: 10px;}
+
+#content-wrapper #content-zone div.article-list-item {margin-bottom: 20px;}
+#content-wrapper #content-zone div.article-list-item h3 {margin: 0px; margin-bottom: 5px; background-color: #FFB900; padding: 5px; color: #000;}
+#content-wrapper #content-zone div.article-list-item h3 a {color: #000; text-decoration: underline;}
+#content-wrapper #content-zone div.article-list-item h3 a:hover {text-decoration: none;}
+#content-wrapper #content-zone div.article-list-item div.content {margin-top: 10px; border-left: 5px solid #f2f2f2; padding: 10px; margin-left: 10px;}
+
+#content-wrapper #content-zone div.article-page-products {margin-top: 20px;}
+#content-wrapper #content-zone div.article-page-products div.item {margin-bottom: 20px; margin-right: 10px; float: left; width: 260px;}
+#content-wrapper #content-zone div.article-page-products div.item span {display: block; height: 32px; margin-bottom: 5px;}
+#content-wrapper #content-zone div.article-page-products div.item span.iprice {width: 50px; float: right; background-color: #FFB900; text-align: center; color: #fff; font-weight: bold;}
+#content-wrapper #content-zone div.article-page-products div.item img {border: 5px solid #f2f2f2;}
+#content-wrapper #content-zone div.article-page-products div.item a {color: #1122CC; text-decoration: underline;}
+#content-wrapper #content-zone div.article-page-products div.item a:hover {text-decoration: none;}
+
+#footer-wrapper {margin: 20px auto 20px auto; width: 960px; padding: 10px 5px 20px 5px; background-color: #F9FEF8; border-top: 10px solid #333333;}
+#footer-wrapper div.fitem {width: 200px; margin-right: 20px; float: left;}
+#footer-wrapper div.fitem span {display: block; font-weight: bold; font-size: 16px; color: #E40241;}
+#footer-wrapper div.fitem a.small {color: #1122CC; padding: 4px 2px; margin-right: 10px; text-decoration: none;}
+#footer-wrapper div.fitem a.small:hover {text-decoration: underline;}
+#footer-wrapper div.fitem a.normal {color: #1122CC; display: block; text-decoration: none; margin-top: 2px;}
+#footer-wrapper div.fitem a.normal:hover {text-decoration: underline;}
+#footer-wrapper div.fitem-vertical {margin-top: 10px; width: 100%;}
+#footer-wrapper div.fitem-vertical span {font-weight: bold;}
+#footer-wrapper div.fitem-vertical a {font-size: 12px; color: #1122CC;}
+
+
+div.listing-description {margin-top: 10px; margin-bottom: 20px;}
+
+div.search-no-results {background-color: #ffffcc; padding: 10px; border: 5px solid #f2f2f2;}
+div.search-no-results h3 {margin: 0px; margin-bottom: 10px; color: #F97A09;}
+div.search-no-results h4 {margin: 0px; margin-bottom: 10px; color: #9eba00;}
+div.search-no-results a.rec_link {color: #1122CC; text-decoration: none; margin-right: 5px;}
+div.search-no-results a.rec_link:hover {text-decoration: underline;}
+div.search-no-results div.rec-product-item {width: 320px; margin-right: 4px; margin-bottom: 10px; float: left; overflow: hidden; background-color: #fff; padding: 2px;}
+div.search-no-results div.rec-product-item-last {width: 320px; margin-bottom: 10px; float: left; overflow: hidden; background-color: #fff; padding: 2px;}
+div.search-no-results div.rec-product-item a.title {display: block; color: #1122CC; margin-bottom: 5px; height: 15px; overflow: hidden;}
+div.search-no-results div.rec-product-item-last a.title {display: block; color: #1122CC; margin-bottom: 5px; height: 15px; overflow: hidden;}
+div.search-no-results div.rec-product-item span {float: left; width: 100px; color: #fe0000; padding: 5px; text-align: left;}
+div.search-no-results div.rec-product-item-last span {float: left; width: 100px; color: #fe0000;  padding: 5px; text-align: left;}
+
+div.partner_box { border-top: 5px solid #f2f2f2; margin-top: 20px; padding: 10px 0px;}
+div.partner_box h3 {margin: 0px; margin-bottom: 5px;}
+div.partner_box a {float: left; margin-right: 10px;}

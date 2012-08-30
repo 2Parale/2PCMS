@@ -1,0 +1,63 @@
+Options +FollowSymlinks
+RewriteEngine on
+
+
+
+#redirect de domeniu si catre www
+#rewritecond %{http_host} ^domeniu.tld [nc]
+#rewriterule ^(.*)$ http://www.domeniu.tld/$1 [r=301,nc]
+
+#error handling
+#ErrorDocument 404 http://www.domeniu.tld/error.php?ecode=404
+#ErrorDocument 400 http://www.domeniu.tld/error.php?ecode=400
+#ErrorDocument 500 http://www.domeniu.tld/error.php?ecode=500
+
+
+#manager
+RewriteRule ^manager/$ manager/index.php [L]
+
+
+#Nu face rewrite decat daca ce s-a cerut nu exista fizic pe disc (f = file si d = directory)
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME} !-f
+
+
+#index page
+RewriteRule ^index.html$ index.php [L]
+RewriteRule ^/$ index.php [L]
+
+#static pages
+#RewriteRule ^ajutor/$ help.php [L]
+
+#redirect link afiliat
+RewriteRule ^cumpara/([^/]*)-([0-9]+).html$ product_redirect.php?id=$2 [L]
+
+#Cautare
+RewriteRule ^cauta/([^/]*)/$ search.php?action=search&page=1&keys=$1 [L]
+RewriteRule ^cauta/([^/]*)/([0-9]+).html$ search.php?action=search&page=$2&keys=$1 [L]
+
+#Listare produse
+#-- dupa pret
+RewriteRule ^preturi-([^/]*)/([0-9]+)-([0-9]+)/$ listing.php?type=price&vmin=$2&vmax=$3&page=1 [L]
+RewriteRule ^preturi-([^/]*)/([0-9]+)-([0-9]+)/([0-9]+).html$ listing.php?type=price&vmin=$2&vmax=$3&page=$4 [L]
+
+#-- dupa brand
+RewriteRule ^brand/([^/]*)/$ listing.php?type=brand&slug=$1&page=1 [L]
+RewriteRule ^brand/([^/]*)/([0-9]+).html$ listing.php?type=brand&slug=$1&page=$2 [L]
+
+#-- dupa categorie
+RewriteRule ^([^/]*)/$ listing.php?type=category&slug=$1&page=1 [L]
+RewriteRule ^([^/]*)/([0-9]+).html$ listing.php?type=category&slug=$1&page=$2 [L]
+
+#Pagina produs
+RewriteRule ^([^/]*)-([0-9]+).html$ product.php?id=$2 [L]
+
+#Landing Page
+RewriteRule ^lp/([^/]*)-([0-9]+).html$ lp.php?id=$2 [L]
+
+#articole
+RewriteRule ^articole/([^/]*)/$ article_category.php?slug=$1 [L]
+RewriteRule ^articole/([^/]*)/([^/]*)-([0-9]+).html$ article.php?id=$3 [L]
+
+#Sitemap
+RewriteRule ^sitemap.xml$ sitemap.php [L]

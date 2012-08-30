@@ -1,0 +1,517 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Datagrid Class Manual</title>
+<style type="text/css">
+	body, td, div, p, h1, h2, h3, h4 {
+		font-family:"Trebuchet MS", sans-serif;
+	}
+	a{
+		font-size:12px;
+		text-decoration:underline;
+		color:#000066;
+		font-weight:bold;
+	}
+	
+	h4{
+		text-decoration:underline;
+	}
+	
+	h2{
+		background-color:#000066;
+		color:#FFFFFF;
+		padding-bottom:5px;
+		padding-top:5px;
+		padding-left:5px;
+		padding-right:5px;	
+	}
+	
+	div.code {
+		font-size:11px;
+		color:#990000;
+		font-style:italic;
+		background-color:#CCCCCC;
+		padding-bottom:5px;
+		padding-top:5px;
+		padding-left:5px;
+		padding-right:5px;
+	}
+	
+	div.box{
+		padding:3px;
+		border-width:1px;
+		border-color:#000000;
+		border-style:dotted;
+	}
+</style>
+</head>
+<body>
+
+
+<h1>msDatagrid Class ver 1.5</h1>
+<h3>User's manual</h3>
+
+
+<br>
+<br>
+
+<ol>
+	<li><a href="#desc">General description</a></li>
+	<li><a href="#method">Methods</a></li>
+	<li><a href="#example">Examples</a></li>
+	<li><a href="#change">Changes</a></li>
+	<li><a href="#todo">ToDo List</a></li>
+</ol>
+
+
+
+<br>
+<br>
+
+
+<a name="desc"><h2>General description</h2></a>
+The msDatagrid class is used to make a customized table display of a sql statement.<br>
+Any instance of the msDatagrid class will consist of:<br>
+- a paging row: used for pagination and records statistics<br>
+- a header row: used for display of column labels<br>
+- records rows<br>
+
+<br>
+<h4>Requirements</h4>
+- PHP 5<br>
+- the ezSql class used for connection to mysql <em>(included in the package)</em><br>
+
+<br>
+<h4>Customization</h4>
+- you can customize the display of the table rows using css classes<br>
+- you can customize how many records are displayed per page<br>
+- you can customize the links for next/previous page navigation<br>
+- you can define various parameters for pagination, such as where to show it, what type of pagination to show, etc<br>
+- and many more ...<br>
+
+<strong>Special:</strong><br>
+The datagrid is build using a lot of default values. The datagrid can be used without even thinking about some of the defaults or 
+by customizing the display as one wishes.<br>
+
+
+<br>
+<br>
+<a name="method"><h2>Methods</h2></a>
+
+First of all you have to do the following:<br>
+- include the datagrid class file<br>
+<div class="code">include ("path_to_classes/class.sql.php");</div><br>
+
+- include the ezSql class file (a new instance of the ezClass is created by default)<br>
+<div class="code">include ("path_to_classes/class.datagrid.php");</div><br> 
+
+- create a new instance of the datagrid object<br>
+<div class="code">
+$myDG = new Datagrid($db);<br>
+//$db is the instance of the ezSql class<br>
+</div><br>
+
+<br>
+
+
+<strong>1. Initialize</strong><br>
+<div class="box">
+<strong>setSqlString($SqlString) </strong><br>
+Sets the sql string used to retriev the records that are to be displayed in the datagrid.<br>
+Usage:<br>
+<div class="code">
+$myDG->setSqlString ("Select * from t_users left join t_groups on t_users.groupId=t_groups.groupId");
+</div>
+</div>
+
+<br>
+
+<div class="box">
+<strong>getSqlString() </strong><br>
+Gets the sql string used to retriev the records that are to be displayed in the datagrid.<br>
+If no value was set prior to this call it will return null.<br>
+Usage:<br>
+<div class="code">
+$mySql = $myDG->getSqlString();
+</div>
+</div>
+
+<br>
+
+<div class="box">
+<strong>setSqlCountString($SqlString) </strong><br>
+Sets the sql string used to retrieve the count of the records that will be displayed in the datagrid.<br>
+Usage:<br>
+<div class="code">
+$myDG->setSqlCountString ("Select count(*) from t_users");
+</div>
+</div>
+
+<br>
+
+<div class="box">
+<strong>getSqlCountString() </strong><br>
+Retrieve the sql string used to retrieve the count of the records that will be displayed in the datagrid.<br>
+Usage:<br>
+<div class="code">
+$mySql = $myDG->getSqlCountString ();
+</div>
+</div>
+
+<br>
+
+<div class="box">
+<strong>setIdField($UserId) </strong><br>
+Sets the ID field used as unique reference for the recordset that will be retrieved.<br>
+Usage:<br>
+<div class="code">
+$myDG->setIdField("userId");
+</div>
+</div>
+
+<br>
+
+<div class="box">
+<strong>getIdField() </strong><br>
+Gets the ID field.<br>
+Usage:<br>
+<div class="code">
+$myId = $myDG->getIdField ();
+</div>
+</div>
+
+<br>
+
+<div class="box">
+<strong>setSelfLink($Url) </strong><br>
+Sets the link of the page that is used to display the datagrid (include query string or if qs is null end it with <strong>?</strong>).<br>
+Usage:<br>
+<div class="code">
+$myDG->setSelfLink("index.php?");
+</div>
+</div>
+
+<br>
+
+<div class="box">
+<strong>getSelfLink() </strong><br>
+Gets the ID field.<br>
+Usage:<br>
+<div class="code">
+$mySelfLink = $myDG->getSelfLink ();
+</div>
+</div>
+
+<br>
+
+<div class="box">
+<strong>setCurrentPage ($CurrentPage) </strong><br>
+Sets the page number of the datagrid.<br>
+Value is taken from $_GET["curPage"]; if $_GET["curPage"] is null then you should set it to 1.<br>
+The default value is set to 1.<br> 
+Usage:<br>
+<div class="code">
+$myDG->setCurrentPage($curPage);
+</div>
+</div>
+
+<br>
+
+<div class="box">
+<strong>getCurrentPage() </strong><br>
+Gets the current page.<br>
+Usage:<br>
+<div class="code">
+$myCurPage = $myDG->getCurrentPage ();
+</div>
+</div>
+<br>
+
+
+<br>
+<br>
+<strong>2. Customize display</strong><br>
+<div class="box">
+<strong>setNavImages($image_prev, $image_next) </strong><br>
+Sets the images used to build the navigation links.<br>
+<em>$image_prev</em> and <em>$image_next</em> must represent the path to the images.<br>
+If this values are null or are not initialized then the links will be text (&laquo;prev and next&raquo;)<br>
+There is no default value.<br>
+Usage:<br>
+<div class="code">
+$myDG->setNavImages($image_prev, $image_next);
+</div>
+</div>
+
+<br>
+
+<div class="box">
+<strong>getNavImages() </strong><br>
+Returns an associative array containing the definition of the images used for the navigational links.<br>
+The images definitions will be stored in the array for the keys <em>image_prev</em> and <em>image_next</em>.<br>
+Usage:<br>
+<div class="code">
+$arImages = $myDG->getNavImages ();
+</div>
+</div>
+
+
+<br>
+
+
+<div class="box">
+<strong>setPaginationSelectVisibility ($bPaginationSelectVisible) </strong><br>
+Sets if the pagination select box is displayed or not.<br>
+Usage:<br>
+<div class="code">
+$myDG->setPaginationSelectVisibility (true);
+</div>
+</div>
+
+
+<br>
+
+<div class="box">
+<strong>setPaginationGotoVisibility ($bPaginationGotoVisible) </strong><br>
+Sets if the pagination GoTo box is displayed or not.<br>
+GoTo: a input box where you input the page number and a button to press on.<br>
+Usage:<br>
+<div class="code">
+$myDG->setPaginationGotoVisibility (true);
+</div>
+</div>
+
+
+<br>
+
+
+<div class="box">
+<strong>setPaginationDisplay($sZoneDisplayed) </strong><br>
+Sets where to display the pagination control.<br>
+Allowed values for $sZoneDisplayed:<br>
+- <em>up</em><br>
+- <em>bottom</em><br>
+- <em>both</em><br>
+Usage:<br>
+<div class="code">
+$myDG->setPaginationDisplay ('both');
+</div>
+</div>
+
+
+<br>
+
+
+<div class="box">
+<strong>setLanguageDefinition ($sLanguageLabel, $sLanguageDefinition) </strong><br>
+Sets new definitions for the values in the language dictionary.<br>
+Using the FlushConfig() method one can see the language labels used right now.<br>
+OBS: there are labels that have special markers in it (used to replace to real values). Do not forget to put the markers in the code<br>
+Usage:<br>
+<div class="code">
+$myDG->setLanguageDefinition ('Pagination_GotoLabel', 'Go to page:');
+</div>
+</div>
+
+
+<br>
+
+
+<div class="box">
+<strong>setRowStyle($rowType, $rowStyle) </strong><br>
+Sets the css class names for the datagrid's different elements.<br>
+<em>$rowType</em> - the type of the row (constant, described bellow)<br>
+<em>$rowStyle</em> - name of css class<br>
+Accepted values of <em>$rowType</em><br>
+- <em>container</em> (default value is <em>table_container</em>) : css class for the table that will contain all the records<br>
+- <em>paging_row</em> (default value is <em>td_pager</em>) : css class for the row that will contain the paging information<br>
+- <em>header</em> (default value is <em>td_header</em>) : css class for the header row of the table<br>
+- <em>row_first</em> (default value is <em>td_item_even</em>) : css class for a record row / alternate<br>
+- <em>row_second</em> (default value is <em>td_item_odd</em>) : css class for a record row / alternate second<br>
+- <em>row_mouse_over</em> (default value is <em>td_item_mouseover</em>) : css class for a record row on mouse over (mouse over functionality implemented)<br>
+- <em>nav_link</em> (default value is <em>nav_link</em>) : css class for the next/prev links in the navigation<br>
+- <em>option_link</em> (default value is <em>option_link</em>) : css class for the option links in the datagrid<br>
+Usage:<br>
+<div class="code">
+$myDG->setRowStyle($rowType, $rowStyle);
+</div>
+</div>
+
+<br>
+		
+<br>
+<br>		
+<strong>3. Adding columns</strong><br>
+
+<div class="box">
+<strong>getColumnCount() </strong><br>
+Returns the number of columns added to the datagrid.<br>
+Usage:<br>
+<div class="code">
+$ColCount = $myDG->getNavImages ();
+</div>
+</div>
+
+<br>
+
+<div class="box">
+<strong>addColumn($columnLabel, $columnContent, $columnType, $columnWidth="100px") </strong><br>
+Ads a new column to the datagrid.<br>
+Fields explained:<br>
+- <em>$columnLabel</em> : the description of the column, it will be displayed in the header.<br>
+- <em>$columnWidth</em> : the width of the column; by default is set to 100px.<br>
+- <em>$columnType</em> : defines the type of the column<br>
+&nbsp;&nbsp;the types of column can be:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <em>counter</em> : in this type of column the datagrid will display the record counter<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <em>field</em> : in this type of column the datagrid will display database content (set by the $columnContent variable)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <em>options</em> : in this type of column the datagrid will display the options for each record<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <em>field_eval</em> : in this type of column the datagrid will first replace markers found in the columnContent with database content and then execute the resulting statement using the eval function<br>
+- <em>$columnContent</em> : this variable contains the definition of the content that will be displayed in the table cell if the <em>$columnType = "field"</em>.<br>
+The value for this variable can be either the name of a field that will be returned after the sql statement is executed or can be a more complex build.<br>
+A general description of this field can be: field1|field2|field3|#string1#|fieldn. (it can accept as many parameters as you want)<br>
+What will the datagrid do:<br>
+- first it will try to explode the string using as delimiter |<br>
+- for each element it checks if the element is a static string (between #) or a field name<br>
+- if the element is a static string it removes the # and displays it<br>
+- if the element is not a static string then it gets from the database the value associeted with the element name for the current record<br>
+Examples:<br>
+- for definition <em>userName</em> it will display <em>Buca Daniel</em><br>
+- for definition <em>userName|# added on #|userAddDate</em> it will display <em>Buca Daniel added on 2007-01-15</em><br>
+<b>For the column type field_eval the rules are different!</b><br>
+The $columnContent, for the column type field_eval has the following definition:<br>
+- separator: |<br>
+- margins for fieldName: #<br>
+Example:<br>
+if(|#catRootId#|>0) {echo 'Some statement from the eval function';} else {echo 'Some OTHER statement from the eval function';}<br>
+In this case the #catRootId# will be replaced with the value of this field from the database for the current row, the separators will be 
+removed and the whole resulting string will be executed using the eval() function.<br>
+Usage:<br>
+<div class="code">
+$myDG->addColumn('label', 'fieldName', 'field',);<br>
+$myDG->addColumn ('Nume utilizator', 'userName|# (user: #|userLogin|#)#', 'field', '300px');<br>
+$myDG->addColumn ('Test Eval()', "if(|#catRootId#|>0) {echo 'ARE CATEG PARINTE';} else {echo 'ESTE CATEG PARINTE';}", 'field_eval', '150px', 'left');
+</div>
+</div>
+
+<br>
+
+
+
+
+<br>
+<br>
+<strong>4. Adding options</strong><br>
+
+<div class="box">
+<strong>addOption ($displayText, $displayImage, $Link, $triggerEvent) </strong><br>
+Ads a option for each row from the datagrid that will be displayed in the <em>options</em> column (if it was defined).<br>
+Fields explained:<br>
+- <em>$displayText</em> : text displayed for the link<br>
+- <em>$displayImage</em> : image for the option; if a image is not defined tha datagrid will create a text link<br>
+- <em>$Link</em> : it represents the url or the JS code that will be called when link is activated; the string <em>#replace#</em> is mandatory as it will be replaced with the string <em>&curPage=pageNumber&idFieldName=idFieldValue </em> (for example with &curPage=2&userId=15) <br>
+- <em>$triggerEvent</em> : accepted values are <em>js</em> or <em>html</em>; if the given value is js then the value from the $Link will be put on the onClick event, if the given value is html then the value from the $Link will be put in the href attribute.<br>
+Usage:<br>
+<div class="code">
+$myDG->addOption ('edit', '', 'users_edit.php?#replace#', 'html');
+</div>
+</div>
+
+<br>
+
+<br>
+<br>
+<strong>5. Display datagrid</strong><br>
+
+<div class="box">
+<strong>Draw() </strong><br>
+Draws the datagrid.<br>
+Usage:<br>
+<div class="code">
+$myDG->Draw ();
+</div>
+</div>
+
+<br>
+
+
+<br>
+<br>
+6. Others<br>
+
+<div class="box">
+<strong>FlushConfig() </strong><br>
+Shows all the variables of the datagrid class at that momment in an organized manner.<br>
+Usage:<br>
+<div class="code">
+$myDG->FlushConfig ();
+</div>
+</div>
+
+<br>
+
+<br>
+<br>
+<br>
+
+<a name="example"><h2>Examples</h2></a>
+<div class="code">
+<pre>
+$curPage = $_GET["curPage"];
+if ($curPage == "") {$curPage = 1;}
+
+
+//create instance
+$myDG = new Datagrid($db);
+
+//set general settings
+$myDG->setSqlString ("Select * from t_users left join t_groups on t_users.groupId=t_groups.groupId");
+$myDG->setSqlCountString ("Select count(*) from t_users");
+$myDG->setIdField("userId");
+$myDG->setSelfLink("index.php?");
+$myDG->setCurrentPage($curPage);
+
+
+//adding columns
+$myDG->addColumn ('#', '', 'counter', '30px');
+$myDG->addColumn ('Nume utilizator', 'userName|# (user: #|userLogin|#)#', 'field', '300px');
+$myDG->addColumn ('Data adaugare', 'userAddDate', 'field');
+$myDG->addColumn ('Grup', 'groupName', 'field');
+$myDG->addColumn ('Test Eval()', "if(|#catRootId#|>0) {echo 'ARE CATEG PARINTE';} else {echo 'ESTE CATEG PARINTE';}", 'field_eval', '150px', 'left');
+$myDG->addColumn ('Optiuni', '', 'options');
+
+
+//adding options
+$myDG->addOption ('editeaza', '', 'users_edit.php?#replace#', 'html');
+
+
+//draw
+$myDG->Draw();
+
+//flushing config
+$myDG->FlushConfig();
+</pre>
+</div>
+
+<br>
+<br>
+<br>
+<a name="example"><h2>Changes</h2></a>
+First version published on 4 March 2007<br>
+Second version published on 21 June 2007
+
+<br>
+<br>
+<br>
+<a name="example"><h2>ToDo List</h2></a>
+<ol>	
+	<li>Implement column type light_datagrid: a cell is a light instance of the datagrid </li>
+	<li>Implement <em>sortable</em> attribute on columns</li>
+    <li>Implement <em>AddSearchField()</em> method that will be used to build a search form for the datagrid</li>
+    <li>Implement additional field - one field that it will be represented as a new row displayed under the record row. 
+    Possibilities of expand / collapse available</li>
+    <li>Possibility to format the output in a column</li>
+</ol>
+
+
+</body>
+</html>
