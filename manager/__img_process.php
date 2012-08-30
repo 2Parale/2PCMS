@@ -19,7 +19,8 @@ $processing_msg = "Procesare :: [" . $prod->id . "] " . $prod->title . "<br />&r
 
 
 $arImage = explode(".",$prod->img_url);
-$fname = "imagine_" . trim($prod->title_url,"_") . "_" . $prod->id . "." . $arImage[count($arImage)-1];                
+//$fname = "imagine_" . trim($prod->title_url,"_") . "_" . $prod->id . "." . $arImage[count($arImage)-1];                
+$fname = "imagine_" . trim($prod->title_url,"_") . "_" . $prod->id . ".jpg";
 file_put_contents("../product_images/_temp/" . $fname, file_get_contents($prod->img_url));
 
 $destination_folder = $prod->partner_id . "/" . $prod->category_id . "/";

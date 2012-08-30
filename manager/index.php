@@ -209,13 +209,13 @@ include "include/header.php";
     <div class="spacer10"></div>
     
     <div style="width: 860px; border: 2px solid #f2f2f2; padding: 4px;">
-        <h3 style="background-color: #D4EEE5; padding: 5px;">Ultimele articole de pe 9A.ro/blog</h3>
+        <h3 style="background-color: #D4EEE5; padding: 5px;">Ultimele articole de pe blogul 2PCMS</h3>
         <?
         $filemtime = @filemtime("include/_blogcontent.html");
         if ($filemtime and (time() - $filemtime < 86400)){
             readfile("include/_blogcontent.html");
         }else{
-            $objBlog = simplexml_load_file("http://www.9a.ro/blog/feed/");
+            $objBlog = simplexml_load_file("http://2pcms.2parale.ro/blog/feed/");
             $i=0;
             if($objBlog!=null){            
                 $blog_content = "";

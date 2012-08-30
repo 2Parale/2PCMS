@@ -6,6 +6,25 @@ set_time_limit(3600);
 
 if(!userIsOk()){redirTo("login.php");}//checking user
 
+//GET FINAL URL IN CASE OF 301/302 REDIRECTS
+function get_furl($url) {
+    $furl = false;
+    // First check response headers
+    $headers = get_headers($url);
+    // Test for 301 or 302
+    if(preg_match('/^HTTP\/\d\.\d\s+(301|302)/',$headers[0])) {
+        foreach($headers as $value) {
+            if(substr(strtolower($value), 0, 9) == "location:") {
+                $furl = trim(substr($value, 9, strlen($value)));
+            }
+        }
+    }
+    // Set final URL
+    $furl = ($furl) ? $furl : $url;
+    return $furl;
+}
+
+
 
 //Handle requests
 if(isset($_GET["action"])){
@@ -17,7 +36,23 @@ if(isset($_GET["action"])){
         
         $feed = $db->get_row("Select * from aff_feeds where id=$feed_id");
         
-        file_put_contents('../feeds/feed-'.$feed->partner_id."-".$feed->id.".xml", file_get_contents($feed->feed_url));        
+        
+        $url  = $feed->feed_url;
+        $path = '../feeds/feed-'.$feed->partner_id."-".$feed->id.".xml";
+
+        $url = get_furl($url);
+        
+        $ch = curl_init($url);             
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_MAXREDIRS, 20);                
+                        
+        $data = curl_exec($ch);
+        file_put_contents($path, $data);
+        
+        curl_close($ch);        
+        
+               
         $db->query("Update aff_feeds set feed_filename='feed-".$feed->partner_id."-".$feed->id.".xml', last_date=NOW() where id=$feed_id");
         
         $_SESSION["response_msg"] = "Feed-ul a fost downloadat!";
