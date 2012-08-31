@@ -4,4 +4,4 @@
 
 ## Documentatie
 
-Se gadeste in [2PCMS/DOCS](/DOCS)
+Se gadeste in folderu DOCS
