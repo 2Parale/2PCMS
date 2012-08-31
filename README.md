@@ -1,7 +1,10 @@
-## Despre 2PCMS 
+# 2PCMS 
 
-2PCMS este un soft care importa feedurile de pe [2Parale](http://www.2parale.ro/feeds/) si generaza un website complet.
+## Despre
+2PCMS este un soft care importa feedurile de pe [2Parale](http://www.2parale.ro/feeds/) și generaza un website complet.
 
-## Documentatie
+## Documentație
 
 Se gadeste in folderu DOCS
+
+## [Issues] (https://github.com/2Parale/2PCMS)
