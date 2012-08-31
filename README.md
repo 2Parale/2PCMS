@@ -4,4 +4,4 @@
 
 ## Documentatie
 
-Se gadeste in [/DOCS](/DOCS)
+Se gadeste in [2PCMS/DOCS](/DOCS)
