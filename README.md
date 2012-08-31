@@ -4,5 +4,4 @@
 
 ## Documentatie
 
-Se gadeste in [/DOCS](/DOCS) 
-
+Se gadeste in [/DOCS](/DOCS)
