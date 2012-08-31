@@ -7,4 +7,6 @@
 
 Se gadeste in folderu DOCS
 
-## [Issues] (https://github.com/2Parale/2PCMS)
+## Bugs
+
+Bugurile se pot reclama in tabul de [Issues](https://github.com/2Parale/2PCMS)
