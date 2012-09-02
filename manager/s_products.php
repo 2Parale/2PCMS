@@ -182,13 +182,65 @@ include "include/header.php";
 
 <div class="spacer10"></div>
 
+<form name="show_filters" id="show_filters" method="get" action="s_products.php">
+	<?php
+	// mentine in url parametri care exista deja
+	parse_str($_SERVER['QUERY_STRING'], $query_string);
+	if( !empty($query_string) ) {
+		foreach( $query_string as $keyv => $param ) {
+			echo '<input type="hidden" name="'.$keyv.'" value="'.$param.'" />';
+		}
+	}
+	?>
+	
+	<div style="border: 1px solid #8c8c8c; padding: 5px;">
+		<span style="font-weight: bold; float: left; margin-right: 10px; line-height: 24px;">Adauga filtre site:</span> 
+		<select name="search_filter_group" id="search_filter_group" style="float: left; margin-right: 10px; width: 130px;">
+			<option value="0">Toate grupurile de filtre</option>
+			<?
+			$gpfs = $db->get_results("Select id, group_name from shop_filter_groups order by group_name asc");
+			if($cats!=null){
+				foreach($gpfs as $gpf){
+					?>
+					<option <? if((int)$_GET["search_filter_group"]==$gpf->id){echo 'selected="selected"';} ?> value="<?=$gpf->id?>"><?=$gpf->group_name?></option>
+					<?
+				}
+			}
+			?>        
+		</select>
+		<?php if( isset($_GET['search_filter_group']) && (int) $_GET['search_filter_group'] > 0 ) { ?>
+		<select name="search_filter" id="search_filter" style="float: left; margin-right: 10px; width: 130px;">
+			<option value="0">Toate filtrele</option>
+			<?
+			$sel_q = "SELECT id, filter_name FROM shop_filters WHERE filter_group_id = ".(int) $_GET['search_filter_group']." ORDER BY filter_name ASC;";
+			$gfs = $db->get_results($sel_q);
+			if($cats!=null){
+				foreach($gfs as $gf){
+					?>
+					<option <? if((int)$_GET["search_filter"]==$gf->id){echo 'selected="selected"';} ?> value="<?=$gf->id?>"><?=$gf->filter_name?></option>
+					<?
+				}
+			}
+			?>        
+		</select>
+		<?php } ?>
+		
+		<a href="javascript:void(0)" onclick="$('#show_filters').submit()" class="button"><span>Adauga</span></a>
+		<div class="clear"></div>             
+	</div>
+	<input type="submit" style="width: 0px; height: 0px; border: 0px; padding: 0px;">
+</form>
+
+<div class="spacer10"></div>
+
 
 <?php
 if(isset($_GET["action"]) && $_GET["action"]=="search"){
     //searching
-    $sql = "Select a.*, b.category, c.shop, c.shop_url from shop_products a 
+    $sql = "Select distinct a.*, b.category, c.shop, c.shop_url, xp.shop_filter_id from shop_products a 
     left join shop_categories b on a.category_id=b.id 
     left join aff_partners c on a.partner_id=c.id 
+	left join shop_filters_x_products xp on a.id = xp.shop_product_id AND xp.shop_filter_id = ".(int) $_GET['search_filter']."
     where a.id>0 
     ";
     $sql_count = "Select count(*) from shop_products a where a.id>0 ";    
@@ -216,16 +268,37 @@ if(isset($_GET["action"]) && $_GET["action"]=="search"){
     $self_link = "s_products.php?action=search&search_category=$search_category&search_partner=$search_partner&search_prod=".urlencode($_GET["search_prod"]);
     $delete_link = "s_products.php?action=delete_product&return_action=search&search_category=$search_category&search_partner=$search_partner&search_prod=".urlencode($_GET["search_prod"]);
     $search_extra_url = "search_category=$search_category&search_partner=$search_partner&search_prod=".urlencode($_GET["search_prod"]);
+	if( isset($_GET['search_filter_group']) ) {
+		$search_extra_url .= "&search_filter_group=".(int) $_GET['search_filter_group'];
+		$self_link        .= "&search_filter_group=".(int) $_GET['search_filter_group'];
+		$delete_link      .= "&search_filter_group=".(int) $_GET['search_filter_group'];
+	}
+	if( isset($_GET['search_filter']) ) {
+		$search_extra_url .= "&search_filter=".(int) $_GET['search_filter'];
+		$self_link        .= "&search_filter=".(int) $_GET['search_filter'];
+		$delete_link      .= "&search_filter=".(int) $_GET['search_filter'];
+	}
 }else{
     //unfiltered listing
-    $sql = "Select a.*, b.category, c.shop, c.shop_url from shop_products a 
+    $sql = "Select distinct a.*, b.category, c.shop, c.shop_url, xp.shop_filter_id from shop_products a 
     left join shop_categories b on a.category_id=b.id 
     left join aff_partners c on a.partner_id=c.id 
+	left join shop_filters_x_products xp on a.id = xp.shop_product_id AND xp.shop_filter_id = ".(int) $_GET['search_filter']."
     order by a.id";
     $sql_count = "Select count(*) from shop_products";    
     $self_link = "s_products.php?";
     $delete_link = "s_products.php?action=delete_product";
     $search_extra_url = "";
+	if( isset($_GET['search_filter_group']) ) {
+		$search_extra_url .= "search_filter_group=".(int) $_GET['search_filter_group'];
+		$self_link        .= "search_filter_group=".(int) $_GET['search_filter_group'];
+		$delete_link      .= "&search_filter_group=".(int) $_GET['search_filter_group'];
+	}
+	if( isset($_GET['search_filter']) ) {
+		$search_extra_url .= ($search_extra_url == "" ? '' : '&') . "search_filter=".(int) $_GET['search_filter'];
+		$self_link        .= ($search_extra_url == "s_products.php?" ? '' : '&') . "&search_filter=".(int) $_GET['search_filter'];
+		$delete_link      .= "&search_filter=".(int) $_GET['search_filter'];
+	}
 }
 
 $myDG->setSqlString ($sql);
@@ -244,8 +317,12 @@ $myDG->addColumn ('Afiliat', '#<b>#|shop|#</b> <i>(<a href="#|shop_url|#" target
 $myDG->addColumn ('Categorie magazin', 'category', 'field', '200px', 'left');
 $myDG->addColumn ('Produs', 'title', 'field', '250px', 'left');
 $myDG->addColumn ('Pret', 'price_int|# Lei#', 'field', '100px', 'left');
-$myDG->addColumn ('URL Aff', '#<a href="#|aff_url|#" target="_blank">click</a>#', 'field', '60px', 'center');
-$myDG->addColumn ('URL Img', '#<a href="#|img_url|#" target="_blank">click</a>#', 'field', '60px', 'center');
+$myDG->addColumn ('URL Aff', '#<a href="#|aff_url|#" target="_blank">click</a>#', 'field', '50px', 'center');
+$myDG->addColumn ('URL Img', '#<a href="#|img_url|#" target="_blank">click</a>#', 'field', '50px', 'center');
+if( isset($_GET['search_filter']) && (int) $_GET['search_filter'] > 0 ) {
+	
+	$myDG->addColumn ('Filtru', '$shop_filter_id = (int) "|#shop_filter_id#|"; if($shop_filter_id != "" && $shop_filter_id == '.(int) $_GET['search_filter'].') { echo "<input type=\'checkbox\' value=\'1\' checked=\'checked\' id=\'filter_product_|#id#|_'.(int) $_GET['search_filter'].'\' />"; } else { echo "<input type=\'checkbox\' value=\'1\' id=\'filter_product_|#id#|_'.(int) $_GET['search_filter'].'\' />"; }', 'field_eval', '50px', 'center');
+}
 
 $myDG->addColumn ('Optiuni', '', 'options');
 
@@ -259,6 +336,35 @@ $myDG->addOption ('sterge', 'images/delete.gif', 'ConfirmDelete2Link(\''.$delete
 $myDG->Draw();
 ?>
 
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$('input[id^="filter_product_"]').click(function() {
+		var exp = $(this).attr('id').split('filter_product_');
+		var ids = exp[1].split('_');
+		//console.log(ids);
+		var product_id = ids[0];
+		var filter_id  = ids[1];
+		var action_type = $(this).is(":checked") ? 'add' : 'delete';
+
+		$.ajax({
+			url: "ajax_proxy.php",
+			data: {
+				action: "add_product_filter",
+				product_id: product_id,
+				filter_id: filter_id,
+				type: action_type
+			},
+			beforeSend: function() {
+				$('input[id^="filter_product_"]').attr("disabled", "disabled");
+			},
+			success: function(data) {
+				$('input[id^="filter_product_"]').removeAttr("disabled");
+			}
+		});		
+	});
+});
+</script>
 
 
 <?php
