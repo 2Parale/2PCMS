@@ -39,6 +39,7 @@
         <a href="s_products.php" <?php if($page_name=="s_products"){echo 'class="selected"';} ?>>Produse</a>    
         <a href="s_categories.php" <?php if($page_name=="s_categories"){echo 'class="selected"';} ?>>Categorii</a>        
         <a href="s_brands.php" <?php if($page_name=="s_brands"){echo 'class="selected"';} ?>>Branduri</a>        
+        <a href="s_filters.php" <?php if($page_name=="s_filters"){echo 'class="selected"';} ?>>Filtre</a>        
         <a href="s_pricerange.php" <?php if($page_name=="s_pricerange"){echo 'class="selected"';} ?>>Price ranges</a>        
         <a href="s_texttrans.php" <?php if($page_name=="s_texttrans"){echo 'class="selected"';} ?>>Text transformation</a>        
     </div>    

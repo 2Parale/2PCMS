@@ -1,5 +1,6 @@
 <?php
 include "../common/common.php"; 
+if(!userIsOk()){redirTo("login.php");}//checking user 
 
 //handle ajax requests
 if(isset($_GET["action"])){
@@ -230,6 +231,21 @@ if(isset($_GET["action"])){
         
         exit();
     }
+	
+	
+	// add product filter
+	if( trim($_GET['action']) == "add_product_filter" && (int) $_GET['product_id'] > 0 && (int) $_GET['filter_id'] > 0 && trim($_GET['type']) != "" ) {
+		switch( $_GET['type'] ) {
+			case "add":
+				$query = "INSERT INTO shop_filters_x_products (`shop_filter_id`, `shop_product_id`) VALUES (".(int) $_GET['filter_id'].", ".(int) $_GET['product_id'].");";
+				break;
+			case "delete":
+				$query = "DELETE FROM shop_filters_x_products WHERE `shop_filter_id` = ".(int) $_GET['filter_id']." AND `shop_product_id` = ".(int) $_GET['product_id']."";
+				break;
+		}
+		$db->query($query);
+		exit();
+	}
     
 }
 ?>

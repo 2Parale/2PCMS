@@ -35,11 +35,51 @@ if($type=="category"){
     $category = $db->get_row("Select SQL_CACHE * from shop_categories where category_url='$slug' limit 1");        
     if($category==null){redirTo($_CONFIG["urlpath"]);}
     
-    $sql_content = "Select * from shop_products where category_id=".$category->id." and active=1 order by title asc limit $start, " . $_CONFIG["rec_per_page"];
-    $sql_count = "Select count(*) from shop_products where category_id=".$category->id." and active=1";    
+	// filter condition
+	if( isset($_GET['filter_group_id']) && isset($_GET['filter_id']) ) {
+		$filter_where = " and sfx.shop_filter_id = ".(int) $_GET['filter_id']." ";
+	} else {
+		$filter_where = "";
+	}
+	
+    $sql_content = "Select p.* 
+				from shop_products p 
+				left join shop_filters_x_products sfx on p.id = sfx.shop_product_id AND sfx.shop_filter_id = ".(int) $_GET['filter_id']."
+				where p.category_id=".$category->id." and p.active=1 
+				".$filter_where."
+				order by p.title asc 
+				limit $start, " . $_CONFIG["rec_per_page"];
+    $sql_count = "Select count(p.id) 
+				from shop_products p 
+				left join shop_filters_x_products sfx on p.id = sfx.shop_product_id AND sfx.shop_filter_id = ".(int) $_GET['filter_id']."
+				where p.category_id=".$category->id." and p.active=1" . $filter_where;    
+	$sql_filters = "select distinct sf.id as 'filter_id', sf.filter_name, sf.filter_slug, sfg.id as 'filter_group_id', sfg.group_name, sfg.group_slug
+				from shop_products p
+				inner join shop_filters_x_products sfx on p.id = sfx.shop_product_id 
+				inner join shop_filters sf on sfx.shop_filter_id = sf.id 
+				inner join shop_filter_groups sfg on sf.filter_group_id = sfg.id
+				where p.category_id=".$category->id." and p.active=1";
+				
+	#filters
+	$filters = $db->get_results($sql_filters);
+	$product_filters = array();
+	if(!empty($filters)) {
+		foreach( $filters as $filter ) {
+			$product_filters[$filter->filter_group_id]['group_name']     = $filter->group_name; 
+			$product_filters[$filter->filter_group_id]['slug_group_name'] = $filter->group_slug; 
+			$product_filters[$filter->filter_group_id]['filters'][]  = array('id' => $filter->filter_id, 'name' => $filter->filter_name, 'slug' => $filter->filter_slug); 
+		}
+	}
     
-    $pagination_slug = $slug;
-    
+	// filter condition
+	if( isset($_GET['filter_group_id']) && isset($_GET['filter_id']) ) {
+		$pagination_slug = $slug . "/produse-" . $product_filters[(int) $_GET['filter_group_id']]['slug_group_name'];
+		$pagination_slug .= $product_filters[(int) $_GET['filter_group_id']]['filters'][(int) $_GET['filter_id']]['slug'];
+		$pagination_slug .= '-' . (int) $_GET['filter_group_id'] . '-' . (int) $_GET['filter_id'];
+	} else {
+		$pagination_slug = $slug;
+    }
+	
     $page_heading = $category->category;
     $extra_title = $category->category . " - pagina " . $page;
     

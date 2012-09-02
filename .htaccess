@@ -49,6 +49,10 @@ RewriteRule ^brand/([^/]*)/([0-9]+).html$ listing.php?type=brand&slug=$1&page=$2
 RewriteRule ^([^/]*)/$ listing.php?type=category&slug=$1&page=1 [L]
 RewriteRule ^([^/]*)/([0-9]+).html$ listing.php?type=category&slug=$1&page=$2 [L]
 
+#-- dupa categorie - produse filtrate
+RewriteRule ^([^/]*)/produse-([^/]*)-([^/]*)-([0-9]+)-([0-9]+)/$ listing.php?type=category&slug=$1&filter_group_id=$4&filter_id=$5&page=1 [L]
+RewriteRule ^([^/]*)/produse-([^/]*)-([^/]*)-([0-9]+)-([0-9]+)/([0-9]+).html$ listing.php?type=category&slug=$1&filter_group_id=$4&filter_id=$5&page=$6 [L]
+
 #Pagina produs
 RewriteRule ^([^/]*)-([0-9]+).html$ product.php?id=$2 [L]
 
