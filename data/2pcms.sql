@@ -452,6 +452,52 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `name`, `password`, `email`, `last_date`, `last_ip`) VALUES
 (1, 'Demo Name', 'demo', 'demo@demo.ro', '2012-04-12 00:17:45', '::1');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shop_filter_groups`
+--
+
+CREATE TABLE `shop_filter_groups` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `group_name` varchar(250) NOT NULL,
+ `group_slug` varchar(250) NOT NULL,
+ `position` int(3) NOT NULL DEFAULT '0',
+ PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shop_filters`
+--
+
+CREATE TABLE `shop_filters` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `filter_group_id` int(11) NOT NULL,
+ `filter_name` varchar(250) NOT NULL,
+ `filter_slug` varchar(250) NOT NULL,
+ `position` int(3) NOT NULL,
+ PRIMARY KEY (`id`),
+ KEY `filter_group_id` (`filter_group_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shop_filters_x_products`
+--
+
+CREATE TABLE `shop_filters_x_products` (
+ `id` int(15) NOT NULL AUTO_INCREMENT,
+ `shop_filter_id` int(11) NOT NULL,
+ `shop_product_id` int(11) NOT NULL,
+ PRIMARY KEY (`id`),
+ KEY `shop_filter_id` (`shop_filter_id`),
+ KEY `shop_product_id` (`shop_product_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
