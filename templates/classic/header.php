@@ -86,8 +86,21 @@
         <? /** PRICES END **/?> 
         
                 
-                
-        
+		<? /** FILTERS START **/?>
+		<?php if(!empty($product_filters)) { ?>
+		<div id="prices">
+			<h2>Filtreaza rezultatele</h2>
+			<?php
+			foreach($product_filters as $group_key => $product_filter_group) {
+				echo '<h3>'.$product_filter_group['group_name'].'</h3>';
+				foreach($product_filter_group['filters'] as $pfilter) {
+					echo '<h4><a href="'.$_CONFIG["urlpath"].htmlspecialchars(strip_tags($_GET['slug'])).'/produse-'.$product_filter_group['slug_group_name'].'-'.$pfilter['slug'].'-'.$group_key.'-'.$pfilter['id'].'/" title=""> '.$pfilter['name'].'</a></h4>';
+				}
+			}
+			?>
+		</div>
+		<?php } ?>
+		<? /** FILTERS END **/?>
         
         
         <? /** BRANDS START **/?> 
