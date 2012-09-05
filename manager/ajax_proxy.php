@@ -1,5 +1,6 @@
 <?php
 include "../common/common.php"; 
+if(!userIsOk()){redirTo("login.php");}//checking user 
 
 //handle ajax requests
 if(isset($_GET["action"])){
